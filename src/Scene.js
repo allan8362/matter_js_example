@@ -26,12 +26,14 @@ class Scene extends Component {
       options: {
         width: 450,
         height: 600,
-        wireframes: false
+        wireframes: false,
+        background: "#E0FFFF",
+        currentbackground: "#E0FFFF"
       }
     });
     console.log("render:", render);
 
-    var wallOptions = { isStatic: true };
+    var wallOptions = { isStatic: true, render: {fillStyle: "#4B0082"}};
 
     World.add(engine.world, [
       // walls - x, y, width, height, {options}
@@ -50,7 +52,7 @@ class Scene extends Component {
       // Ball Release wall
       Bodies.rectangle(345, 575, 20, 750, wallOptions),
       // Top right angled wall
-      Bodies.rectangle(345, 30, 5, 250, {angle: -45, isStatic: true}),
+      Bodies.rectangle(345, 30, 5, 250, {angle: -45, isStatic: true, render: {fillStyle: "#4B0082"}}),
       // Bumper
       Bodies.circle(140, 140, 50, {isStatic: true, render: {fillStyle: "#B22222"}})
     ]);
@@ -85,7 +87,7 @@ class Scene extends Component {
     });
 
     const launchPinball = function (event){
-      if(event.keyCode==32){
+      if(event.keyCode===32){
         World.add(engine.world, [pinball]);
         Matter.Body.setVelocity(pinball, { x: 0, y: -30});
 		    Matter.Body.setAngularVelocity(pinball, 0);
